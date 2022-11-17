@@ -15,11 +15,13 @@ class Movie(models.Model):
     poster_path = models.CharField(max_length=100)
     genres = models.ManyToManyField(Genre, related_name='genres')
 
-class Actor(models.Model):
-    actor_pk = models.AutoField(primary_key=True)
-    gender = models.IntegerField()
+class Credit(models.Model):
+    credit_pk = models.AutoField(primary_key=True)
+    job = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
-    popularity = models.IntegerField()
     profile_path = models.TextField(null=True)
-    character = models.CharField(max_length=100)
+    gender = models.IntegerField()
+    character = models.CharField(max_length=100, null=True)
+    popularity = models.IntegerField()
     movie_id = models.IntegerField()
+    

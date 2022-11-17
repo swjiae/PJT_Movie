@@ -45,24 +45,43 @@ def get_credit_datas():
 
     for i in range(50):
         URL = f"https://api.themoviedb.org/3/movie/{movie_id[i]}/credits?api_key={TMDB_API_KEY}&language=ko-KR"
-        actors = requests.get(URL).json()
+        credit_Data = requests.get(URL).json()
 
-        for actor in actors['cast'][:5]:
+        for actor in credit_Data['cast'][:5]:
             if actor.get('id', ''):
                 fields = {
-                    'gender': actor['gender'],
+                    "job" : actor['known_for_department'],
                     'name': actor['name'],
-                    'popularity': actor['popularity'],
                     'profile_path': actor['profile_path'],
+                    'gender': actor['gender'],
                     'character': actor['character'],
-                    "movie_id": actors['id'],
+                    'popularity': actor['popularity'],
+                    "movie_id": credit_Data['id']
                 }
 
                 data = {
-                    "model": "movies.actor",
+                    "model": "movies.credit",
                     "fields": fields
                 }
 
+                datas.append(data)
+        
+        for director in credit_Data['crew']:
+            if director['job'] == 'Director':
+                fields = {
+                    "job" : director['known_for_department'],
+                    'name': director['name'],
+                    'profile_path': director['profile_path'],
+                    'gender': director['gender'],
+                    'popularity': director['popularity'],
+                    "movie_id": credit_Data['id']
+                }
+
+                data = {
+                    "model": "movies.credit",
+                    "fields": fields
+                }
+                
                 datas.append(data)
     
     with open("credit_data.json", "w", encoding="utf-8") as w:
@@ -70,7 +89,7 @@ def get_credit_datas():
 
 get_credit_datas()
 
-def get_movie_datas():
+def get_genre_datas():
     datas = []
 
     URL = f"https://api.themoviedb.org/3/genre/movie/list?api_key={TMDB_API_KEY}&language=ko-KR&page"
@@ -96,4 +115,4 @@ def get_movie_datas():
     with open("genre_data.json", "w", encoding="utf-8") as w:
         json.dump(datas, w, indent="\t", ensure_ascii=False)
 
-get_movie_datas()
+# get_genre_datas()
