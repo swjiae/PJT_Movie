@@ -7,14 +7,13 @@ from django.contrib.auth.models import (
 class UserManager(BaseUserManager):
     def create_user(self, email, nickname, profile_img, password=None):
         """
-        Creates and saves a User with the given email, date of
-        birth and password.
+        Creates and saves a User with the given email, fields and password.
         """
         if not email:
             raise ValueError('Users must have an email address')
-
+        
         user = self.model(
-            email=self.normalize_email(email), # 이메일 주소 정규화 (lower)
+            email=self.normalize_email(email), # 이메일 주소 정규화 (To lower)
             nickname = nickname,
             profile_img = profile_img
         )
@@ -36,7 +35,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
 class User(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
@@ -44,7 +42,8 @@ class User(AbstractBaseUser):
         unique=True,
     )
     nickname = models.CharField(max_length=10)
-    profile_img = models.ImageField()
+
+    profile_img = models.ImageField(blank=True, upload_to='profile_img')
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

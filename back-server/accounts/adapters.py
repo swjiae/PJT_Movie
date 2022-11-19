@@ -5,15 +5,17 @@ class CustomAccountAdapter(DefaultAccountAdapter):
 
     def save_user(self, request, user, form, commit=True):
         data = form.cleaned_data
-        # 기본 저장 필드: first_name, last_name, username, email
         user = super().save_user(request, user, form, False)
-        # 추가 저장 필드: profile_image
+
+        # 추가 저장 필드: nickname, profile_image
         nickname = data.get("nickname")
+        profile_img = data.get("profile_img")
+
         if nickname:
             user.nickname = nickname
-        profile_image = data.get("profile_image")
-        if profile_image:
-            user.profile_image = profile_image
+
+        if profile_img:
+            user.profile_img = profile_img
 
         user.save()
         return user

@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
 
+    # OpenAPI 3.0
+    'drf_spectacular',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,6 +62,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    # Authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    # permission
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    # spectacular Settings
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -119,6 +148,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'my_api.validators.NumberValidator',
+    }
 ]
 
 
@@ -141,6 +173,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# image upload root setting
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -154,14 +190,16 @@ CORS_ALLOWED_ORIGINS = [
 # Custom User 등록
 AUTH_USER_MODEL = 'accounts.User'
 
-SITE_ID = 1
 
-# Custom Register Serializer 등록
+# Custom Register Serializer
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
 }
 
-# Cusotm Account Adapter 등록
+# Custom Login Serializer
+REST_AUTH_SERIALIZERS = {'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer'}
+
+# Cusotm Account Adapter
 ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 
 # email setting
