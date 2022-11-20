@@ -2,6 +2,8 @@
     <div class="background">
         <!-- <h1>PremainView</h1> -->
         <navbarView/>
+        <h1>TWEEDLES</h1>
+        <img src="@/assets/tt.png">
     </div>
     
 </template>
@@ -19,11 +21,11 @@ export default {
 </script>
 
 <style>
-.background {
+/* .background {
     background-image: url("../assets/Dee-dum.webp");
     height: 90vh;
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: 100%;
-}
+} */
 </style>
