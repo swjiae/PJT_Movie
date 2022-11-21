@@ -197,12 +197,15 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 
 # Custom Login Serializer
-REST_AUTH_SERIALIZERS = {'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer'}
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer',
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
+}
 
 # Cusotm Account Adapter
 ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 
-# email setting
+# Email setting
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
