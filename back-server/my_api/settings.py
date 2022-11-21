@@ -185,6 +185,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 교차 출처 허용할 도메인 등록
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
+    'http://192.168.0.78:8080',
 ]
 
 # Custom User 등록
