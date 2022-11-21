@@ -31,8 +31,30 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # App
     'accounts',
     'movies',
+
+    # DRF
+    'rest_framework',
+
+    # CORS for solving SOP
+    "corsheaders",
+
+    # dj_rest_auth for authentication
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+
+    # allauth for registration
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
+
+    # OpenAPI 3.0
+    'drf_spectacular',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,9 +63,36 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    # Authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    # permission
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    # spectacular Settings
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -99,6 +148,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'my_api.validators.NumberValidator',
+    }
 ]
 
 
@@ -121,7 +173,40 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# image upload root setting
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 교차 출처 허용할 도메인 등록
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080',
+]
+
+# Custom User 등록
+AUTH_USER_MODEL = 'accounts.User'
+
+
+# Custom Register Serializer
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
+}
+
+# Custom Login Serializer
+REST_AUTH_SERIALIZERS = {'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer'}
+
+# Cusotm Account Adapter
+ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
+
+# email setting
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
