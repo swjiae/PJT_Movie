@@ -58,7 +58,7 @@ export default {
         })
           .then((res) => {
             console.log(res)
-            this.$router.push({ name: 'MovieDetailView', parmas: { movie_id:this.$route.params.movie_id }})
+            this.$router.push({ name: 'MovieDetailView', parmas: { id:this.$route.params.id }})
           })
           .catch((err) => {
             console.log(err)

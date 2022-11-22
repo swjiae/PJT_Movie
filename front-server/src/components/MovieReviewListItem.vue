@@ -16,11 +16,6 @@ export default {
     props: {
       review: Object
     },
-    data() {
-      return {
-        user: this.$store.state.user
-      }
-    },
     computed: {
       reviewId() {
         return this.review.id

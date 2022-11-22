@@ -1,12 +1,15 @@
 <template>
   <div>
-    ReviewCommentListItem
+    {{ comment }}
   </div>
 </template>
 
 <script>
 export default {
     name: 'ReviewCommentListItem',
+    props: {
+      comment: Object
+    }
 }
 </script>
 

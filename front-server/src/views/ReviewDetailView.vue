@@ -3,7 +3,9 @@
       <h1>ReviewDetailView</h1>
       {{ getReview }}
       <ReviewCommentCreate/>
-      <ReviewCommentList/>
+      <ReviewCommentList
+        :review="getReview"
+      />
     </div>
   </template>
   
@@ -21,9 +23,8 @@
     computed: {
       getReview() {
         const review = this.$store.state.reviews.find((review) => {
-          review.id == this.$route.params.id
+          return review.id == this.$route.params.id
         })
-        console.log(review)
         return review
       }
     }

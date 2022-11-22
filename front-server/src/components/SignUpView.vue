@@ -55,7 +55,7 @@ export default {
       }
 
       this.$store.dispatch('signUp', payload)
-
+      this.$router.push({ name: 'MainView' })
     }
   }
 }
