@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>MainView</h1>
-    <button @click="logOut">logOut</button>
+    <b-button @click="logOut">logOut</b-button>
     <div>
     <MovieList
     class="row d-flex"

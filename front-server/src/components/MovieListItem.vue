@@ -8,7 +8,7 @@
     <p class="card-text">{{ movie.overview }}</p>
     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
   </div>
-</div>
+  </div>
 
 </div>
     
