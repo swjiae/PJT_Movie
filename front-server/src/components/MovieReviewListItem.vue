@@ -1,10 +1,10 @@
 <template>
   <div>
-    {{ review.user }} <br>
+    {{ review.nickname }} <br>
     {{ review.title }} <br>
     {{ review.score }} <br>
     
-    <router-link :to="{ name: 'ReviewDetailView', params: { id: review.review_id } }">
+    <router-link :to="{ name: 'ReviewDetailView', params: { id: reviewId } }">
       [DETAIL]
     </router-link>
   </div>
@@ -16,7 +16,17 @@ export default {
     props: {
       review: Object
     },
-}
+    data() {
+      return {
+        user: this.$store.state.user
+      }
+    },
+    computed: {
+      reviewId() {
+        return this.review.id
+      }
+    }
+  }
 </script>
 
 <style>

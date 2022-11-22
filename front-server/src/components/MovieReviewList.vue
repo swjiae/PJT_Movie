@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>MovieReviewList</h1>
-    <router-link :to="{ name: 'MovieReviewCreate', params: { id:movie?.movie_id } }">[CREATEREVIEW]</router-link>
+    <router-link :to="{ name: 'MovieReviewCreate', params: { id:movieId } }">[CREATEREVIEW]</router-link>
      <MovieReviewListItem
       v-for="review in reviews"
       :key="review.id"
@@ -27,10 +27,12 @@
     computed: {
       reviews() {
         const reviews = this.$store.state.reviews.filter((review) => {
-          console.log(review.movie)
-          return review.movie == this.movie.movie_id
+          return review.movie == this.movie?.movie_id
         })
         return reviews
+      },
+      movieId() {
+        return this.movie?.movie_id
       }
     },
   }

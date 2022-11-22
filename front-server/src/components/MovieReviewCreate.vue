@@ -29,42 +29,43 @@ export default {
     },
     methods: {
       createReview() {
-      const title = this.title
-      const score = this.score
-      const content = this.content
-      if (!title) {
-        alert('제목을 입력해주세요')
-        return
-      } else if (!score) {
-        alert('평점을 입력해주세요')
-        return
-      } else if (!content) {
-        alert('내용을 입력해주세요')
-        return
-      }
-      console.log(`${API_URL}/api/v1/movies/${this.$route.params.id}/reviews/`)
-      axios({
-        method: 'post',
-        url: `${API_URL}/api/v1/movies/${this.$route.params.id}/reviews/`,
-        data: {
-          title: title,
-          score: score,
-          content: content,
-        },
-        headers: {
-          Authorization: `Token ${this.$store.state.token}`
+        const title = this.title
+        const score = this.score
+        const content = this.content
+        const nickname = this.$store.state.user.nickname
+        if (!title) {
+          alert('제목을 입력해주세요')
+          return
+        } else if (!score) {
+          alert('평점을 입력해주세요')
+          return
+        } else if (!content) {
+          alert('내용을 입력해주세요')
+          return
         }
-      })
-        .then((res) => {
-          console.log(res)
-          this.$router.push({ name: 'MovieDetailView', parmas: { id:this.$route.params.id }})
+        axios({
+          method: 'post',
+          url: `${API_URL}/api/v1/movies/${this.$route.params.id}/reviews/`,
+          data: {
+            title: title,
+            score: score,
+            content: content,
+            nickname: nickname,
+          },
+          headers: {
+            Authorization: `Token ${this.$store.state.token}`
+          }
         })
-        .catch((err) => {
-          console.log(err)
-        })
+          .then((res) => {
+            console.log(res)
+            this.$router.push({ name: 'MovieDetailView', parmas: { movie_id:this.$route.params.movie_id }})
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
     }
-    }
-}
+  }
 </script>
 
 <style>

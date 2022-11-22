@@ -31,7 +31,7 @@ def movie_detail(request, movie_pk):
 
 @api_view(['GET'])
 def movie_credits(request, movie_pk):
-    credits = get_list_or_404(Credit, movie_id=movie_pk)
+    credits = Credit.objects.filter(movie_id=movie_pk)
     if request.method == 'GET':
         serializer = CreditSerializer(credits, many=True)
         return Response(serializer.data)

@@ -19,6 +19,7 @@ export default new Vuex.Store({
     movies: [],
     reviews: [],
     comments: [],
+    user: []
   },
   getters: {
     isLogin(state) {
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     GET_COMMENTS(state, comments) {
       state.comments = comments
     },
+    GET_USER(state, user) {
+      state.user = user
+    } 
   },
   actions: {
     signUp(context, payload) {
@@ -62,6 +66,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
+          context.dispatch('getUser')
         })
     },
     logIn(context, payload) {
@@ -75,10 +80,10 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
+          context.dispatch('getUser')
         })
     },
     logOut(context) {
-      console.log(context.state.token)
       axios({
         method: 'post',
         url: `${API_URL}/accounts/logout/`,
@@ -114,7 +119,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          console.log(res)
           context.commit('GET_REVIEWS', res.data)
         })
         .catch((err) => {
@@ -135,6 +139,21 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+    },
+    getUser(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+      .then((res) => {
+        context.commit('GET_USER', res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
   },
   modules: {

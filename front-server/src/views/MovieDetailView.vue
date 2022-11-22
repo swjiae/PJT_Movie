@@ -2,7 +2,7 @@
   <div>
     <h1>MovieDetailView</h1>
     {{ movie }}
-    {{ credits }}
+    <div v-if="credits.length">{{ credits }}</div>
     <MovieReviewList :movie="movie"/>
   </div>
 </template>
