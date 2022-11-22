@@ -3,7 +3,7 @@
     <h1>Sign Up Page</h1>
     <form @submit.prevent="signUp">
       <label for="email">email : </label>
-      <input type="email" id="email" v-model="email"><br>
+      <input v-model="email"><br>
 
       <label for="password1"> password : </label>
       <input type="password" id="password1" v-model="password1"><br>
@@ -55,7 +55,7 @@ export default {
       }
 
       this.$store.dispatch('signUp', payload)
-
+      this.$router.push({ name: 'MainView' })
     }
   }
 }

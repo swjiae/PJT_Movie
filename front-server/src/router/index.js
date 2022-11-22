@@ -5,6 +5,7 @@ import MainView from '@/views/MainView'
 import ProfileView from '@/views/ProfileView'
 import MovieDetailView from '@/views/MovieDetailView'
 import MovieReviewCreate from '@/components/MovieReviewCreate'
+import ReviewDetailView from '@/views/ReviewDetailView'
 
 Vue.use(VueRouter)
 
@@ -25,14 +26,19 @@ const routes = [
     component: ProfileView
   },
   {
-    path: '/:id',
+    path: '/movie/:id',
     name: 'MovieDetailView',
     component: MovieDetailView
   },
   {
-    path: '/review/:id',
+    path: '/:id',
     name: 'MovieReviewCreate',
     component: MovieReviewCreate
+  },
+  {
+    path: '/review/:id',
+    name: 'ReviewDetailView',
+    component: ReviewDetailView
   },
 ]
 
