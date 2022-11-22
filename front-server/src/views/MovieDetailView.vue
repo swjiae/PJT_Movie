@@ -1,29 +1,37 @@
 <template>
-  <div class="row d-flex justify-content-center">
-
-    <!-- <div>
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="g-0">
-          <div class="col-md-4 col-lg-2 col-sm-2">
-            <img :src="url+movie.poster_path" class="img-fluid rounded-start">
-          </div>
-          <div class="row col-md-8">
-            <div class=" card-body">
-              <h5 class="card-title">{{ movie.title }}</h5>
-              <p class="card-text">{{ movie.overview }}</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-    {{ movie }}
-    {{ credits }}
-    <!-- {{ movie.poster_path }} -->
-    <!-- <img :src="url+movie.poster_path"> -->
-
+  <div class="row">
+    <!-- {{ movie }} -->
+    <div class="d-flex justify-content-center">
+      <b-card no-body class="overflow-hidden" style="max-width: 50%; height:800px">
+        <b-row no-gutters>
+          <b-col md="7">
+            <b-card-img :src="url+movie.poster_path" alt="Image"
+            class="rounded-0"
+            style="height: auto"
+            @mouseover="play_preview"
+            ></b-card-img>
+          </b-col>
+          <b-col md="5">
+            <b-card-body :title="movie.title">
+              <b-card-text>
+                <li>평점 : {{movie.vote_avg}}</li>
+                <li>개봉일 : {{movie.released_date}}</li>
+                <!-- <li>{{genre_list}}수정하기</li> -->
+                <li>
+                줄거리 : {{movie.overview}}
+                </li>
+              </b-card-text>
+            </b-card-body>
+          </b-col>
+        </b-row>
+      </b-card>
+    </div>
+    <hr>
     <MovieReview/>
+
   </div>
+
+
 </template>
 
 <script>
@@ -43,12 +51,14 @@ export default {
         movie: null,
         credits: [],
         url : 'https://image.tmdb.org/t/p/original/',
+        // genre_list: [],
+        // movies: this.$store.state.movies
         
-      }
-    },
+      }},
     created() {
       this.getMovieDetail()
       this.getMovieCredits()
+      this.getGenreList()
     },
     methods: {
       getMovieDetail() {
@@ -75,9 +85,14 @@ export default {
           .catch((err) => {
             console.log(err)
           })
-      }
-    }
-}
+      },
+    //   getGenreList(){
+    //     console.log('movies', this.movies)
+    //     for(let i=0; i<this.movies.genres.length; i++) {
+    //   this.genre_list.push(this.movies.genres[i].name)
+    // }
+    // }
+}}
 </script>
 
 <style>

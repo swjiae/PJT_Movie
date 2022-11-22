@@ -1,13 +1,26 @@
 <template>
-<div class="col-sm-2">
-  <div class="card" style="width: 18rem; margin-left: 20px; margin-bottom: 20px;">
-  <img :src="posterPath" class="card-img-top" height="400px">
-  <div class="card-body">
-    <h5 class="card-title">{{ movie.original_title }}</h5>
-    <hr>
-    <p class="card-text">{{ movie.overview }}</p>
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-  </div>
+<div class="col">
+  <div>
+    <b-card
+      :title="movie.title"
+      :img-src="posterPath"
+      img-height=480px
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem;"
+      class="mb-2"
+      
+    >
+      <b-card-text>
+        {{ movie.overview }}
+      </b-card-text>
+
+      <b-button
+      variant="primary"
+      router-link :to="{ name: 'MovieDetailView', params: { id: movie.movie_id } }"
+      >Detail</b-button>
+    </b-card>
   </div>
 
 </div>
@@ -32,9 +45,12 @@ export default {
     computed: {
       posterPath() {
         return `https://image.tmdb.org/t/p/original/${this.movie.poster_path}`
+      },
+      movieID() {
+        return this.movie.id
+      }
       }
     }
-}
 </script>
 
 <style>

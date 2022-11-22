@@ -19,9 +19,10 @@
   color: #2c3e50;
   display: flex;
   flex-direction: column;
-  background-color: black;
-  height: 100vh;
-  width: 100vw;
+  /* background-color: black;
+  height: 1000vh; */
+  /* width: 100% */
+  /* width: 1000vw; */
 }
 
 nav {
