@@ -1,18 +1,21 @@
 <template>
   <div>
-    <h1>MovieReviewListItem</h1>
-    <ReviewCommentList/>
+    {{ review.user }} <br>
+    {{ review.title }} <br>
+    {{ review.score }} <br>
+    
+    <router-link :to="{ name: 'ReviewDetailView', params: { id: review.review_id } }">
+      [DETAIL]
+    </router-link>
   </div>
 </template>
 
 <script>
-import ReviewCommentList from '@/components/ReviewCommentList'
-
 export default {
     name: 'MovieReviewListItem',
-    components: {
-      ReviewCommentList
-    }
+    props: {
+      review: Object
+    },
 }
 </script>
 

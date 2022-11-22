@@ -45,7 +45,7 @@ export default {
       console.log(`${API_URL}/api/v1/movies/${this.$route.params.id}/reviews/`)
       axios({
         method: 'post',
-        url: `${API_URL}/api/v1/movies/${this.$route.params.id}}/reviews/`,
+        url: `${API_URL}/api/v1/movies/${this.$route.params.id}/reviews/`,
         data: {
           title: title,
           score: score,

@@ -5,6 +5,7 @@
       v-for="movie in movies"
       :key="movie.id"
       :movie="movie"
+      class="col-4"
     />
   </div>
 </template>

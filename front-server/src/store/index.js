@@ -17,6 +17,8 @@ export default new Vuex.Store({
   state: {
     token: null,
     movies: [],
+    reviews: [],
+    comments: [],
   },
   getters: {
     isLogin(state) {
@@ -34,6 +36,12 @@ export default new Vuex.Store({
     },
     GET_MOVIES(state, movies) {
       state.movies = movies
+    },
+    GET_REVIEWS(state, reviews) {
+      state.reviews = reviews
+    },
+    GET_COMMENTS(state, comments) {
+      state.comments = comments
     },
   },
   actions: {
@@ -83,7 +91,6 @@ export default new Vuex.Store({
         })
     },
     getMovies(context) {
-      console.log(context.state.token)
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/`,
@@ -93,6 +100,37 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_MOVIES', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getReviews(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/reviews/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          context.commit('GET_REVIEWS', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getComments(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/comments/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+          context.commit('GET_COMMENTS', res.data)
         })
         .catch((err) => {
           console.log(err)
