@@ -1,7 +1,7 @@
 <template>
     <div class="background">
-        <NavBarView/>
         <h1>TWEEDLES</h1>
+        <NavBarView/>
         <img src="@/assets/tt.png">
     </div>
     

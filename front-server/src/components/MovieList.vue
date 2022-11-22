@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>MovieList</h1>
+    <!-- <h1>MovieList</h1> -->
     <MovieListItem
       v-for="movie in movies"
       :key="movie.id"
