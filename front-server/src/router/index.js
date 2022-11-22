@@ -4,6 +4,7 @@ import PreMainView from '@/views/PreMainView'
 import MainView from '@/views/MainView'
 import ProfileView from '@/views/ProfileView'
 import MovieDetailView from '@/views/MovieDetailView'
+import MovieReviewCreate from '@/components/MovieReviewCreate'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/:id',
     name: 'MovieDetailView',
     component: MovieDetailView
+  },
+  {
+    path: '/review/:id',
+    name: 'MovieReviewCreate',
+    component: MovieReviewCreate
   },
 ]
 

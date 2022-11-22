@@ -1,20 +1,23 @@
 <template>
   <div>
     <h1>MovieReview</h1>
-    <MovieReviewCreate/>
+    <router-link :to="{ name: 'MovieReviewCreate', params: { id:movie.movie_id } }">[CREATE]</router-link>
     <MovieReviewList/>
   </div>
 </template>
 
 <script>
-import MovieReviewCreate from '@/components/MovieReviewCreate'
 import MovieReviewList from '@/components/MovieReviewList'
 
 export default {
     name: 'MovieReview',
     components: {
-      MovieReviewCreate,
       MovieReviewList
+    },
+    props: {
+      movie: Object
+    },
+    computed: {
     }
 }
 </script>

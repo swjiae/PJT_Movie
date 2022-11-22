@@ -3,7 +3,7 @@
     <h1>MovieDetailView</h1>
     {{ movie }}
     {{ credits }}
-    <MovieReview/>
+    <MovieReview :movie="movie"/>
   </div>
 </template>
 
