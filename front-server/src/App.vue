@@ -4,14 +4,11 @@
       <router-link :to="{ name: 'ProfileView' }">Profile</router-link>
     </nav>
     <router-view/>
-    <PreMainView/>
   </div>
 </template>
 <script>
-  import PreMainView from '@/views/PreMainView'
   export default {
     components: {
-      PreMainView,
     }
   }
 </script>

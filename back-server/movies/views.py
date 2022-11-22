@@ -82,3 +82,20 @@ def comment_list(request):
         comments = get_list_or_404(Comment)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
+
+@api_view(['GET', 'DELETE', 'PUT'])
+def review_detail(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'GET':
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        review.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'PUT':
+        serializer = ReviewSerializer(review, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
