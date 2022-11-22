@@ -115,4 +115,34 @@ def get_genre_datas():
     with open("genre_data.json", "w", encoding="utf-8") as w:
         json.dump(datas, w, indent="\t", ensure_ascii=False)
 
-# get_genre_datas()
+get_genre_datas()
+
+def get_trailer_datas():
+    datas=[]
+
+    for i in range(50):
+        URL = f"https://api.themoviedb.org/3/movie/{movie_id[i]}/videos?api_key={TMDB_API_KEY}&language=ko-KR"
+        trailer_Data = requests.get(URL).json()
+
+        for data in trailer_Data['results'][:1]:
+            if data.get('id', ''):
+                fields = {
+                    "key" : data['key'],
+                    "site" : data['site'],
+                    "type" : data['type'],
+                    "name" : data['name'],
+                    "movie_id" : trailer_Data['id']
+                    
+                }
+
+                data = {
+                    "model": "movies.trailer",
+                    "fields": fields
+                }
+
+                datas.append(data)
+    
+    with open("trailer_data.json", "w", encoding="utf-8") as w:
+        json.dump(datas, w, indent="\t", ensure_ascii=False)
+
+get_trailer_datas()
