@@ -1,28 +1,22 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" >Tweedles</a>
-        </div>
-        <SignUpView/>
-        <LogInView/>
-    </nav>
+    <div class="col-1">
+      <LogInView/>
+    </div>
+    <div class="col-1">
+      <SignUpView/>
+    </div>
   </div>
 </template>
 
 <script>
 import SignUpView from '@/components/SignUpView'
 import LogInView from '@/components/LogInView'
-
-export default {
+  export default {
     name: 'NavBarView',
     components: {
+      LogInView,
       SignUpView,
-      LogInView
-    },
-}
+  }
+  }
 </script>
-
-<style>
-
-</style>

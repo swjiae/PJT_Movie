@@ -1,0 +1,232 @@
+[
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "jD5Yc2qMzBw",
+			"site": "YouTube",
+			"type": "Featurette",
+			"name": "[블랙 아담] 박스오피스 휩쓸어버린 문제적 히어로",
+			"movie_id": 436270
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "9D-XKOfoJVY",
+			"site": "YouTube",
+			"type": "Teaser",
+			"name": "[스마일] 메인 30초 예고편",
+			"movie_id": 882598
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "vcLtKBRt344",
+			"site": "YouTube",
+			"type": "Teaser",
+			"name": "[블랙 팬서: 와칸다 포에버] 압도적 리뷰 예고편",
+			"movie_id": 505642
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "MYPotDkwXfE",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "에놀라 홈즈 2 | 공식 예고편: 파트 1 | 넷플릭스",
+			"movie_id": 829280
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "WecHvYe25wI",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "영화 [온 더 라인 On The Line] 예고편: 멜 깁슨, 윌리암 모즐리, 케빈 딜런: 2022.11: 스릴러",
+			"movie_id": 979924
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "iRZ3Nh_d4eY",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "영화 [폴: 600미터] 메인 예고편(한글): 그레이스 펄튼, 버지니아 가드너: 2022.11",
+			"movie_id": 985939
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "hHs38rmOuhs",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "영화 [서부 전선 이상 없다] 티저 예고편(한글): 2022.10.28 넷플릭스: 전쟁, 액션, 밀덕",
+			"movie_id": 49046
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "kQiaMIBKBSU",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "영화 [오펀: 천사의 탄생] 예고편(한글): 줄리아 스타일스, 이사벨 펄먼: 2022.10: 범죄 공포",
+			"movie_id": 760161
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "tTAEQG3K-yU",
+			"site": "YouTube",
+			"type": "Teaser",
+			"name": "[토르: 러브 앤 썬더] 짜릿한 리뷰 예고편",
+			"movie_id": 616037
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "e2C6AK76IiI",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "9월 8일, 당신의 가장 특별한 소원이 이뤄집니다✨ [피노키오] 메인 예고편ㅣ디즈니+",
+			"movie_id": 532639
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "DSEfRVqjbFA",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "쥬라기 시리즈의 압도적 피날레! [쥬라기 월드: 도미니언] 예고편",
+			"movie_id": 507086
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "4OJVhxRXvMU",
+			"site": "YouTube",
+			"type": "Teaser",
+			"name": "[불릿 트레인] 15초 혼돈의 열차 예고편",
+			"movie_id": 718930
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "f_Ds412zMEs",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "폴링 포 크리스마스 | 린제이 로한 | 공식 예고편 | 넷플릭스",
+			"movie_id": 833097
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "IGaVc3DeCkg",
+			"site": "YouTube",
+			"type": "Teaser",
+			"name": "[탑건: 매버릭] 어메이징 극찬 예고편",
+			"movie_id": 361743
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "TBvWsIEdkGQ",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "영화 [호커스 포커스 2] 예고편(한글): 베트 미들러, 사라 제시카 파커, 캐시 나지미: 2022: Hocus Pocus 2",
+			"movie_id": 642885
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "T8tOaFlhIS8",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "영화 [선과 악의 학교] 메인 예고편(한글): 샤를리즈 테론, 소피아 와일리: 2022.10 넷플릭스 : The School for Good & Evil",
+			"movie_id": 779782
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "6PviCbxI-9U",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "'럭' - Luck — 공식 예고편 | Apple TV+",
+			"movie_id": 585511
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "bG3FmxSTwKw",
+			"site": "YouTube",
+			"type": "Clip",
+			"name": "[스파이더맨: 노 웨이 홈] 무삭제 클립 (부제: 놀고 싶다 이거야?)",
+			"movie_id": 634649
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "bh1gLq1h_K0",
+			"site": "YouTube",
+			"type": "Featurette",
+			"name": "지구에서 시작된 첫 사냥에 대한 이야기! ㅣ [프레이] '전설의 부활' 피처렛 l 디즈니+",
+			"movie_id": 766507
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "7wl6UrO1UjI",
+			"site": "YouTube",
+			"type": "Teaser",
+			"name": "[수퍼 소닉2] \"다시 돌아왔소닉!\" 타이틀 공개",
+			"movie_id": 675353
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "IZpaMT1H85o",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "[아바타 리마스터링] 예고편 전격 공개!",
+			"movie_id": 19995
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "kihrFxwdMb4",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "[아바타: 물의 길] 메인 예고편",
+			"movie_id": 76600
+		}
+	},
+	{
+		"model": "movies.trailer",
+		"fields": {
+			"key": "xT76LsDubZ0",
+			"site": "YouTube",
+			"type": "Trailer",
+			"name": "[비스트] 예고편",
+			"movie_id": 760741
+		}
+	}
+]

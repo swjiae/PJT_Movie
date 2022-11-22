@@ -9,7 +9,6 @@
 <script>
 import ProfileUpdate from '@/components/ProfileUpdate'
 import ProfileReviewList from '@/components/ProfileReviewList'
-
 export default {
     name: 'ProfileView',
     components: {
@@ -20,5 +19,4 @@ export default {
 </script>
 
 <style>
-
 </style>

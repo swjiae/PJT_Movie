@@ -26,6 +26,13 @@ class Movie(models.Model):
     poster_path = models.CharField(max_length=100)
     genres = models.ManyToManyField(Genre, related_name='genres')
 
+class Trailer(models.Model):
+    key = models.CharField(max_length=50)
+    site = models.CharField(max_length=50)
+    type = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    movie_id = models.IntegerField()
+
 class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="reviews")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

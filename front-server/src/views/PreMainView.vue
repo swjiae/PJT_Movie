@@ -1,7 +1,8 @@
 <template>
     <div class="background">
-        <NavBarView/>
-        <h1>TWEEDLES</h1>
+        <NavBarView
+        class="row d-flex justify-content-center"
+        />
         <img src="@/assets/tt.png">
     </div>
     
@@ -19,13 +20,4 @@ export default {
 </script>
 
 <style>
-/* .background {
-    background-image: url("../assets/Dee-dum.webp");
-    height: 90vh;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: 100%;
-} */
 </style>
-
-

@@ -1,15 +1,17 @@
 <template>
   <div>
     <h1>MainView</h1>
-    <button @click="logOut">logOut</button>
-    <MovieList/>
+    <b-button @click="logOut">logOut</b-button>
+    <div>
+    <MovieList
+    class="row d-flex"
+    />
+    </div>
   </div>
 </template>
 
 <script>
 import MovieList from '@/components/MovieList'
-
-
 export default {
     name: 'MainView',
     components: {
@@ -30,5 +32,4 @@ export default {
 </script>
 
 <style>
-
 </style>
