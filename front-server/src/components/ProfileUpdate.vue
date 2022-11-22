@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>ProfileUpdate</h1>
+    <button>UPDATE</button>
   </div>
 </template>
 

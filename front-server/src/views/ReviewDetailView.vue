@@ -1,6 +1,8 @@
 <template>
     <div>
       <h1>ReviewDetailView</h1>
+      <button @click="deleteReview">DELETE</button><br>
+      <router-link :to="{ name: 'ReviewDetailView' }">뒤로가기</router-link>
       {{ getReview }}
       <ReviewCommentCreate/>
       <ReviewCommentList
@@ -27,6 +29,12 @@
         })
         return review
       }
+    },
+    methods: {
+      deleteReview() {
+        this.$store.commit('DELETE_REVIEW', this.getreview.id)
+        this.$router.push({ name: 'ReviewDetailView' })
+      },
     }
   }
   </script>

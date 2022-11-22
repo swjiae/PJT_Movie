@@ -43,6 +43,7 @@ export default {
           alert('내용을 입력해주세요')
           return
         }
+        console.log(this.$route.params.id)
         axios({
           method: 'post',
           url: `${API_URL}/api/v1/movies/${this.$route.params.id}/reviews/`,

@@ -1,11 +1,10 @@
 <template>
   <div>
-    <!-- <h1>MovieList</h1> -->
     <MovieListItem
       v-for="movie in movies"
       :key="movie.id"
       :movie="movie"
-      class="col-2"
+      class="col-4"
     />
   </div>
 </template>

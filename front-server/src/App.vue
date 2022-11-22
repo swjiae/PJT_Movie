@@ -3,7 +3,6 @@
     <h1 style="font-family: 'Rubik Bubbles', cursive;" id="tweedles">TWEEDLES</h1>
     <nav>
       <router-link :to="{ name: 'PreMainView' }">PreMain</router-link> | 
-      <router-link :to="{ name: 'MainView' }">Main</router-link> | 
       <router-link :to="{ name: 'ProfileView' }">Profile</router-link>
     </nav>
     <router-view/>

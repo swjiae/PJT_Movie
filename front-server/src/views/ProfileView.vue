@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1>ProfileView</h1>
+    <div>
+      EMAIL : {{ getUser.email }} <br>
+      NICKNAME : {{ getUser.nickname }} <br>
+      profile : {{ getUser.profile_img }}
+    </div>
     <ProfileUpdate/>
     <ProfileReviewList/>
   </div>
@@ -14,6 +18,11 @@ export default {
     components: {
       ProfileUpdate,
       ProfileReviewList,
+    },
+    computed: {
+      getUser() {
+        return this.$store.state.user
+      }
     }
 }
 </script>

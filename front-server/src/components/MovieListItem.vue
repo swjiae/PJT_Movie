@@ -18,7 +18,7 @@
 
       <b-button
       variant="primary"
-      router-link :to="{ name: 'MovieDetailView', params: { id: movie.movie_id } }"
+      router-link :to="{ name: 'MovieDetailView', params: { id: movieID } }"
       >Detail</b-button>
     </b-card>
   </div>
