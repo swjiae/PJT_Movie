@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link :to="{ name: 'PreMainView' }">PreMain</router-link> | 
+      <router-link :to="{ name: 'MainView' }">Main</router-link> | 
+      <router-link :to="{ name: 'ProfileView' }">Profile</router-link>
     </nav>
     <router-view/>
   </div>

@@ -185,6 +185,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 교차 출처 허용할 도메인 등록
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
+    'http://192.168.0.78:8080',
 ]
 
 # Custom User 등록
@@ -197,16 +198,19 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 
 # Custom Login Serializer
-REST_AUTH_SERIALIZERS = {'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer'}
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer',
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
+}
 
 # Cusotm Account Adapter
 ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 
-# email setting
+# Email setting
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
