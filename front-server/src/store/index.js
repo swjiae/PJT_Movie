@@ -17,6 +17,9 @@ export default new Vuex.Store({
   state: {
     token: null,
     movies: [],
+    reviews: [],
+    comments: [],
+    user: []
   },
   getters: {
     isLogin(state) {
@@ -35,6 +38,15 @@ export default new Vuex.Store({
     GET_MOVIES(state, movies) {
       state.movies = movies
     },
+    GET_REVIEWS(state, reviews) {
+      state.reviews = reviews
+    },
+    GET_COMMENTS(state, comments) {
+      state.comments = comments
+    },
+    GET_USER(state, user) {
+      state.user = user
+    } 
   },
   actions: {
     signUp(context, payload) {
@@ -54,6 +66,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
+          context.dispatch('getUser')
         })
     },
     logIn(context, payload) {
@@ -67,10 +80,10 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
+          context.dispatch('getUser')
         })
     },
     logOut(context) {
-      console.log(context.state.token)
       axios({
         method: 'post',
         url: `${API_URL}/accounts/logout/`,
@@ -83,7 +96,6 @@ export default new Vuex.Store({
         })
     },
     getMovies(context) {
-      console.log(context.state.token)
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/`,
@@ -97,6 +109,51 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+    },
+    getReviews(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/reviews/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+          context.commit('GET_REVIEWS', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getComments(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/comments/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+          context.commit('GET_COMMENTS', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getUser(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+      .then((res) => {
+        context.commit('GET_USER', res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
   },
   modules: {
