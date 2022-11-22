@@ -2,7 +2,11 @@
   <div>
     <h1>MainView</h1>
     <button @click="logOut">logOut</button>
-    <MovieList/>
+    <MovieList
+    v-for="movie in getMovies"
+    :key=movie.id
+    :movie=movie
+    />
   </div>
 </template>
 
