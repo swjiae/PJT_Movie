@@ -25,6 +25,7 @@ class Movie(models.Model):
     overview = models.TextField()
     poster_path = models.CharField(max_length=100)
     genres = models.ManyToManyField(Genre, related_name='genres')
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
 
 class Trailer(models.Model):
     key = models.CharField(max_length=50)
@@ -42,6 +43,7 @@ class Review(models.Model):
     nickname = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
 
 class Comment(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE)

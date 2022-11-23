@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 # model, serializer 불러오기
 from .models import Movie, Credit, Review, Comment
 from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, CommentSerializer, CreditSerializer
-from django.http import JsonResponse
+
 
 # Create your views here.
 @api_view(['GET'])
@@ -101,38 +101,11 @@ def review_detail(request, review_pk):
             serializer.save()
             return Response(serializer.data)
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 def likes(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    if request.method == 'GET':
-        if request.user in movie.like_users.all():
-            cntLike = movie.like_users.all().count()
-            return JsonResponse({'isLiked': True, 'cntLike': cntLike})
-        return JsonResponse({'isLiked': False, 'cntLike': 0})
-    elif request.method == 'POST':
-        if movie.like_users.filter(pk=request.user.pk).exists():
-            movie.like_users.remove(request.user.pk)
-            cntLike = movie.like_users.all().count()
-            return JsonResponse({'isLiked': False, 'cntLike': cntLike})
-        else:
-            movie.like_users.add(request.user)
-            cntLike = movie.like_users.all().count()
-            return JsonResponse({'isLiked': True, 'cntLike': cntLike})
-
-@api_view(['GET', 'POST'])
-def review_likes(request, review_pk):
-    review = get_object_or_404(Review, pk=review_pk)
-    if request.method == 'GET':
-        if request.user in review.like_users.all():
-            cntLike = review.like_users.all().count()
-            return JsonResponse({'isLiked': True, 'cntLike': cntLike})
-        return JsonResponse({'isLiked': False, 'cntLike': 0})
-    elif request.method == 'POST':
-        if review.like_users.filter(pk=request.user.pk).exists():
-            review.like_users.remove(request.user.pk)
-            cntLike = review.like_users.all().count()
-            return JsonResponse({'isLiked': False, 'cntLike': cntLike})
-        else:
-            review.like_users.add(request.user)
-            cntLike = review.like_users.all().count()
-            return JsonResponse({'isLiked': True, 'cntLike': cntLike})
+    if movie.like_users.filter(pk=request.user.pk).exists():
+        movie.like_users.remove(request.user)
+    else:
+        movie.like_users.add(request.user)
+    return Response(movie)

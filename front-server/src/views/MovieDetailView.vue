@@ -10,13 +10,25 @@
             style="height: auto"
             @mouseover="play_preview"
             ></b-card-img>
+            <!-- <b-card-img :src="url+movie.poster_path" alt="Image"
+            class="rounded-0"
+            style="height: auto"
+            ></b-card-img> -->
           </b-col>
           <b-col md="5">
             <b-card-body :title="movie.title">
+
+
+              <form @submit.prevent="changeLike">
+                  <input v-if="isLiked" type="submit" value="좋아요 취소">
+                  <input v-if="!isLiked" type="submit" value="좋아요">
+              </form>
+              <span>좋아요 : {{linkCntLike}}개</span>
+
+
               <b-card-text>
                 <li>평점 : {{movie.vote_avg}}</li>
                 <li>개봉일 : {{movie.released_date}}</li>
-                <!-- <li>{{genre_list}}수정하기</li> -->
                 <li>
                 줄거리 : {{movie.overview}}
                 </li>
@@ -48,34 +60,40 @@ export default {
         movie: null,
         credits: [],
         url : 'https://image.tmdb.org/t/p/original/',
-        // genre_list: [],
-        // movies: this.$store.state.movies
-        
+        isLiked: false,
+        cntLike: null,
       }},
     created() {
       this.getMovieDetail()
       this.getMovieCredits()
-      this.getGenreList()
+      this.checkLiked()
+    },
+    computed: {
+      linkCntLike() {
+        return this.cntLike
+      }
     },
     methods: {
+      play_preview() {
+      },
       getMovieDetail() {
         axios({
           method: 'get',
           url: `${API_URL}/api/v1/movies/${this.$route.params.id}`
         })
-          .then((res) => {
-            this.movie = res.data
-          })
-          .catch((err) => {
-            console.log(err)
-          })
+        .then((res) => {
+          this.movie = res.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       },
       getMovieCredits() {
         axios({
           method: 'get',
           url: `${API_URL}/api/v1/credits/${this.$route.params.id}`
         })
-          .then((res) => {
+        .then((res) => {
             this.credits = res.data
             console.log(res)
           })
@@ -83,13 +101,42 @@ export default {
             console.log(err)
           })
       },
-    //   getGenreList(){
-    //     console.log('movies', this.movies)
-    //     for(let i=0; i<this.movies.genres.length; i++) {
-    //   this.genre_list.push(this.movies.genres[i].name)
-    // }
-    // }
-}}
+      checkLiked() {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/${this.$route.params.id}/likes/`,
+          headers: {
+            'Authorization': `Token ${this.$store.state.token}`,
+          },
+        })
+        .then((res) => {
+          console.log(`res.data.isLiked ${res.data}`)
+          this.isLiked = res.data.isLiked
+          this.cntLike = res.data.cntLike
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      },
+      changeLike() {
+        axios({
+          method: 'post',
+          url: `${API_URL}/api/v1/${this.$route.params.id}/likes/`,
+          headers: {
+            'Authorization': `Token ${this.$store.state.token}`,
+          },
+        })
+          .then((res) => {
+            this.isLiked=res.data.isLiked
+            this.cntLike=res.data.cntLike
+            console.log(this.isLiked)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
+    },
+  }
 </script>
 
 <style>
