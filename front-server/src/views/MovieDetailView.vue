@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <!-- {{ 뒤로가기 }} -->
+    <button><router-link :to="{ name: 'MainView' }">뒤로가기</router-link></button>
+    <!-- {{ movie }} -->
     <div class="d-flex justify-content-center">
       <b-card no-body class="overflow-hidden" style="max-width: 50%; height:800px">
         <b-row no-gutters>
@@ -15,6 +18,12 @@
           <b-col md="5">
             <b-card-body :title="movie.title" class="d-flex row">
               <hr>
+              <!-- 좋아요 -->
+              <form @submit.prevent="changeLike">
+                  <input v-if="isLiked" type="submit" value="좋아요 취소">
+                  <input v-if="!isLiked" type="submit" value="좋아요">
+              </form>
+              <span>좋아요 : {{linkCntLike}}개</span>
               <!-- 텍스트 일렬정렬하기 -->
               <div>
                 <b-card-text>
@@ -72,11 +81,18 @@ export default {
         trailer_key:null,
         trailer_url: null,
         isShow: false,
+        isLiked: false,
+        cntLike: null,
       }},
     created() {
       this.getAllDetail()
+      this.checkLiked()
     },
-
+    computed: {
+      linkCntLike() {
+        return this.cntLike
+      }
+    },
     methods: {
       async getAllDetail() {
         const getdetail_res =  await axios.get(`${API_URL}/api/v1/movies/${this.$route.params.id}`)
@@ -114,6 +130,39 @@ export default {
         },
         diactivate() {
           this.isShow = false
+        },
+        checkLiked() {
+          axios({
+            method: 'get',
+            url: `${API_URL}/api/v1/${this.$route.params.id}/likes/`,
+            headers: {
+              'Authorization': `Token ${this.$store.state.token}`,
+            },
+          })
+            .then((res) => {
+              this.isLiked = res.data.isLiked
+              this.cntLike = res.data.cntLike
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        },
+        changeLike() {
+          axios({
+            method: 'post',
+            url: `${API_URL}/api/v1/${this.$route.params.id}/likes/`,
+            headers: {
+              'Authorization': `Token ${this.$store.state.token}`,
+            },
+          })
+            .then((res) => {
+              this.isLiked=res.data.isLiked
+              this.cntLike=res.data.cntLike
+              console.log(this.isLiked)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
         },
     },
 }
