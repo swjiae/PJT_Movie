@@ -8,17 +8,19 @@
       img-alt="Image"
       img-top
       tag="article"
-      style="max-width: 20rem;"
+      style="max-width: 20rem; height:650px"
       class="mb-2"
       
     >
-      <b-card-text>
-        {{ movie.overview }}
-      </b-card-text>
+      <!-- <b-card-text> -->
+        <!-- {{ movie.overview }} -->
+      <!-- </b-card-text> -->
 
       <b-button
       variant="primary"
-      router-link :to="{ name: 'MovieDetailView', params: { id: movieID } }"
+      router-link
+      tag="img"
+      :to="{ name: 'MovieDetailView', params: { id: movieID } }"
       >Detail</b-button>
     </b-card>
   </div>
