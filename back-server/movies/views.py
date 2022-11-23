@@ -9,8 +9,8 @@ from rest_framework import status
 # DB 값 불러오기
 from django.shortcuts import get_object_or_404, get_list_or_404
 # model, serializer 불러오기
-from .models import Movie, Credit, Review, Comment
-from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, CommentSerializer, CreditSerializer
+from .models import Movie, Credit, Review, Comment, Trailer
+from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, ReviewSerializer, CommentSerializer, CreditSerializer, TrailerSerializer
 from django.http import JsonResponse
 
 # Create your views here.
@@ -34,6 +34,13 @@ def movie_credits(request, movie_pk):
     credits = Credit.objects.filter(movie_id=movie_pk)
     if request.method == 'GET':
         serializer = CreditSerializer(credits, many=True)
+        return Response(serializer.data)
+    
+@api_view(['GET'])
+def movie_trailer(request, movie_pk):
+    trailer = get_object_or_404(Trailer, movie_id=movie_pk)
+    if request.method == 'GET':
+        serializer = TrailerSerializer(trailer)
         return Response(serializer.data)
 
 
