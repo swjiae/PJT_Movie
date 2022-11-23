@@ -4,7 +4,7 @@
     {{ review.title }} <br>
     {{ review.score }} <br>
     
-    <router-link :to="{ name: 'ReviewDetailView', params: { id: reviewId } }">
+    <router-link :to="{ name: 'ReviewDetailView', params: { id: movieId, review_id: reviewId } }">
       [DETAIL]
     </router-link>
   </div>
@@ -14,7 +14,8 @@
 export default {
     name: 'MovieReviewListItem',
     props: {
-      review: Object
+      movieId: String,
+      review: Object,
     },
     computed: {
       reviewId() {

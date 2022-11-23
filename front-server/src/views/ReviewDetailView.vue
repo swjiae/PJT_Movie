@@ -2,8 +2,17 @@
     <div>
       <h1>ReviewDetailView</h1>
       <button @click="deleteReview">DELETE</button><br>
-      <router-link :to="{ name: 'ReviewDetailView' }">뒤로가기</router-link>
+      <button><router-link :to="{ name: 'MovieDetailView', parms:{ id: this.$route.params.id }}">뒤로가기</router-link></button>
       {{ getReview }}
+
+
+      <form @submit.prevent="changeLike">
+          <input v-if="isLiked" type="submit" value="좋아요 취소">
+          <input v-if="!isLiked" type="submit" value="좋아요">
+      </form>
+      <span>좋아요 : {{linkCntLike}}개</span>
+
+
       <ReviewCommentCreate/>
       <ReviewCommentList
         :review="getReview"
@@ -11,10 +20,12 @@
     </div>
   </template>
   
-  <script>
+  <script> 
   import ReviewCommentCreate from '@/components/ReviewCommentCreate'
   import ReviewCommentList from '@/components/ReviewCommentList'
   
+  import axios from 'axios'
+  const API_URL = 'http://127.0.0.1:8000'
 
   export default {
     name: 'ReviewDetailView',
@@ -22,18 +33,75 @@
       ReviewCommentCreate,
       ReviewCommentList,
     },
+    data() {
+      return {
+        isLiked: false,
+        cntLike: null,
+      }
+    },
+    created() {
+      this.checkLiked()
+    },
     computed: {
       getReview() {
         const review = this.$store.state.reviews.find((review) => {
-          return review.id == this.$route.params.id
+          return review.id == this.$route.params.review_id
         })
         return review
+      },
+      linkCntLike() {
+        return this.cntLike
       }
     },
     methods: {
       deleteReview() {
-        this.$store.commit('DELETE_REVIEW', this.getreview.id)
-        this.$router.push({ name: 'ReviewDetailView' })
+        axios({
+          method: 'delete',
+          url: `${API_URL}/api/v1/reviews/${this.$route.params.review_id}/`,
+          headers: {
+            'Authorization': `Token ${this.$store.state.token}`,
+          },
+        })
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        this.$router.push({ name: 'MovieDetailView', parms:{ id: this.$route.params.id }})
+      },
+      checkLiked() {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/${this.$route.params.review_id}/review_likes/`,
+          headers: {
+            'Authorization': `Token ${this.$store.state.token}`,
+          },
+        })
+          .then((res) => {
+            this.isLiked = res.data.isLiked
+            this.cntLike = res.data.cntLike
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
+      changeLike() {
+        axios({
+          method: 'post',
+          url: `${API_URL}/api/v1/${this.$route.params.review_id}/review_likes/`,
+          headers: {
+            'Authorization': `Token ${this.$store.state.token}`,
+          },
+        })
+          .then((res) => {
+            this.isLiked=res.data.isLiked
+            this.cntLike=res.data.cntLike
+            console.log(this.isLiked)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       },
     }
   }
