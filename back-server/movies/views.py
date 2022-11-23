@@ -105,10 +105,10 @@ def review_detail(request, review_pk):
 def likes(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'GET':
+        cntLike = movie.like_users.all().count()
         if request.user in movie.like_users.all():
-            cntLike = movie.like_users.all().count()
             return JsonResponse({'isLiked': True, 'cntLike': cntLike})
-        return JsonResponse({'isLiked': False, 'cntLike': 0})
+        return JsonResponse({'isLiked': False, 'cntLike': cntLike})
     elif request.method == 'POST':
         if movie.like_users.filter(pk=request.user.pk).exists():
             movie.like_users.remove(request.user.pk)
@@ -123,10 +123,10 @@ def likes(request, movie_pk):
 def review_likes(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
+        cntLike = review.like_users.all().count()
         if request.user in review.like_users.all():
-            cntLike = review.like_users.all().count()
             return JsonResponse({'isLiked': True, 'cntLike': cntLike})
-        return JsonResponse({'isLiked': False, 'cntLike': 0})
+        return JsonResponse({'isLiked': False, 'cntLike': cntLike})
     elif request.method == 'POST':
         if review.like_users.filter(pk=request.user.pk).exists():
             review.like_users.remove(request.user.pk)

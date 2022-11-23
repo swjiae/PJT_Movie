@@ -30,7 +30,7 @@ export default {
       }
       axios({
         method: 'post',
-        url: `${API_URL}/api/v1/reviews/${this.$route.params.id}/comments/`,
+        url: `${API_URL}/api/v1/reviews/${this.$route.params.review_id}/comments/`,
         data: {
           content: content,
           nickname: nickname,

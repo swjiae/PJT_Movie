@@ -15,5 +15,5 @@ urlpatterns = [
     path('comments/', views.comment_list),
     # like
     path('<int:movie_pk>/likes/', views.likes),
-    path('<int:review_pk>/likes/', views.review_likes),
+    path('<int:review_pk>/review_likes/', views.review_likes),
 ]

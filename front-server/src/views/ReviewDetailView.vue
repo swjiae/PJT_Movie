@@ -20,7 +20,7 @@
     </div>
   </template>
   
-  <script>
+  <script> 
   import ReviewCommentCreate from '@/components/ReviewCommentCreate'
   import ReviewCommentList from '@/components/ReviewCommentList'
   
@@ -55,31 +55,41 @@
     },
     methods: {
       deleteReview() {
-        this.$store.commit('DELETE_REVIEW', this.getreview.id)
-        this.$router.push({ name: 'ReviewDetailView' })
-      },
-      checkLiked() {
         axios({
-          method: 'get',
-          url: `${API_URL}/api/v1/${this.$route.params.review_id}/likes/`,
+          method: 'delete',
+          url: `${API_URL}/api/v1/reviews/${this.$route.params.review_id}/`,
           headers: {
             'Authorization': `Token ${this.$store.state.token}`,
           },
         })
-        .then((res) => {
-          console.log(`res.data.isLiked ${res.data}`)
-          this.isLiked = res.data.isLiked
-          this.cntLike = res.data.cntLike
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        this.$router.push({ name: 'MovieDetailView', parms:{ id: this.$route.params.id }})
+      },
+      checkLiked() {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/${this.$route.params.review_id}/review_likes/`,
+          headers: {
+            'Authorization': `Token ${this.$store.state.token}`,
+          },
         })
-        .catch((err) => {
-          console.log(err)
-        })
+          .then((res) => {
+            this.isLiked = res.data.isLiked
+            this.cntLike = res.data.cntLike
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       },
       changeLike() {
-        console.log(this.$route.params.review_id, '-------------')
         axios({
           method: 'post',
-          url: `${API_URL}/api/v1/${this.$route.params.review_id}/likes/`,
+          url: `${API_URL}/api/v1/${this.$route.params.review_id}/review_likes/`,
           headers: {
             'Authorization': `Token ${this.$store.state.token}`,
           },

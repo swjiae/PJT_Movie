@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    <button><router-link :to="{ name: 'MainView' }">뒤로가기</router-link></button>
     <!-- {{ movie }} -->
     <div class="d-flex justify-content-center">
       <b-card no-body class="overflow-hidden" style="max-width: 50%; height:800px">
@@ -109,14 +110,13 @@ export default {
             'Authorization': `Token ${this.$store.state.token}`,
           },
         })
-        .then((res) => {
-          console.log(`res.data.isLiked ${res.data}`)
-          this.isLiked = res.data.isLiked
-          this.cntLike = res.data.cntLike
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+          .then((res) => {
+            this.isLiked = res.data.isLiked
+            this.cntLike = res.data.cntLike
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       },
       changeLike() {
         axios({

@@ -16,6 +16,12 @@ class MovieListSerializer(serializers.ModelSerializer):
 
 # review list
 class ReviewListSerializer(serializers.ModelSerializer):
+    
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = get_user_model()
+            fields = '__all__' 
+    like_users = UserSerializer(many=True, read_only=True)
 
     class Meta:
         model = Review
@@ -25,7 +31,8 @@ class ReviewListSerializer(serializers.ModelSerializer):
 
 # comment list
 class CommentSerializer(serializers.ModelSerializer):
-
+    nickname = serializers.CharField(source='user.nickname', read_only=True)
+    
     class Meta:
         model = Comment
         fields = '__all__'
@@ -38,16 +45,10 @@ class ReviewSerializer(serializers.ModelSerializer):
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
     nickname = serializers.CharField(source='user.nickname', read_only=True)
 
-    class UserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = get_user_model()
-            fields = ('nickname',)   
-    like_users = UserSerializer(many=True, read_only=True)
-
     class Meta:
         model = Review
         fields = '__all__'
-        read_only_fields = ('movie', 'user')
+        read_only_fields = ('movie', 'user',)
 
 
 # movie detail
@@ -64,12 +65,13 @@ class MovieSerializer(serializers.ModelSerializer):
     class UserSerializer(serializers.ModelSerializer):
         class Meta:
             model = get_user_model()
-            fields = ('nickname',)   
+            fields = '__all__'  
     like_users = UserSerializer(many=True, read_only=True)
 
     class Meta:
         model = Movie
         fields = '__all__'
+
 
 class CreditSerializer(serializers.ModelSerializer):
     
