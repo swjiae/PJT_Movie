@@ -1,30 +1,48 @@
 <template>
     <div>
       <h1>ReviewDetailView</h1>
-      <button @click="deleteReview">DELETE</button><br>
-      <button><router-link :to="{ name: 'MovieDetailView', parms:{ id: this.$route.params.id }}">뒤로가기</router-link></button>
-      
-      <b-card-img :src="url+getReview.movie.poster_path" alt="Image"
-        class="rounded-0"
-        style="height: 100px"
-        @mouseover="activate"
-        @mouseout="diactivate"
-      ></b-card-img>
+      <div class="container">
+        <div class="row">
+          <div class='col-2'></div>
+          <button class='col-2'><router-link :to="{ name: 'MovieDetailView', parms:{ id: this.$route.params.id }}">뒤로가기</router-link></button>
+          <div class='col-4'></div>
+          <button class='col-2' @click="deleteReview">DELETE</button>
+        </div>
+      </div>
 
-      {{ getReview }}
+      <div class="container">
+        <div class="bg-warning border border-warning bg-opacity-10 mt-3">
+          <b-card-img :src="url+getReview.movie.poster_path" alt="Image"
+            class="rounded-2"
+            style="height: 300px; width: 200px; "
+          ></b-card-img>
+          <h2 class="mt-4">{{ getReview.movie.title}}</h2>
+        </div>
+        <!-- {{ getReview }} -->
+        <div class="rounded-3 border border-danger mt-3 bg-danger bg-opacity-10">
+          <h3>제목: {{getReview.title}}</h3>
+          <div> 평점: {{getReview.score }}</div>
+          <div> 닉네임: {{ getReview.nickname }}</div>
+          <div> 내용: {{ getReview.content }}</div>
+          <!-- <div>좋아요 한 사람들: {{ getReview.like_users }}</div> -->
 
+        </div>
+          <span>좋아요 : {{linkCntLike}}개</span>
+          <form @submit.prevent="changeLike">
+              <input v-if="isLiked" type="submit" value="💖">
+              <input v-if="!isLiked" type="submit" value="🤍">
+          </form>
+          <hr>
+          <ReviewCommentList
+            :review="getReview"
+          />
+          <hr>
 
-      <form @submit.prevent="changeLike">
-          <input v-if="isLiked" type="submit" value="💖">
-          <input v-if="!isLiked" type="submit" value="🤍">
-      </form>
-      <span>좋아요 : {{linkCntLike}}개</span>
+          <ReviewCommentCreate/>
 
-
-      <ReviewCommentCreate/>
-      <ReviewCommentList
-        :review="getReview"
-      />
+        <div>
+        </div>
+      </div>
     </div>
   </template>
   
