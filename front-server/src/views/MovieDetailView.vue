@@ -1,62 +1,55 @@
 <template>
-  <div class="row">
-    <!-- {{ 뒤로가기 }} -->
-    <button><router-link :to="{ name: 'MainView' }">BAEK</router-link></button>
-    <div class="d-flex justify-content-center">
-      <b-card no-body class="overflow-hidden" style="max-width: 50%; height:800px">
-        <b-row no-gutters>
-          <b-col md="7">
-            <b-card-img :src="poster_PATH" alt="Image"
-            class="rounded-0"
-            style="height: auto"
-            @mouseover="activate"
-            @mouseout="diactivate"
-            v-b-modal.modal_trailer
-            ></b-card-img>
-          </b-col>
-          <b-col md="5">
-            <b-card-body :title="Title" class="d-flex row">
+  <div class="container justify-content-center">
+    <button class="rounded mt-5"><router-link :to="{ name: 'MainView' }">뒤로가기</router-link></button>
+    <hr>
+    <div class="row">
+      <div class="d-flex col">
+        <img :src="url+movie.poster_path" alt="Image"
+          class="rounded-0"
+          style="height: 36rem"
+          @mouseover="activate"
+          @mouseout="diactivate"
+          v-b-modal.modal_trailer
+        />
 
-              <hr>
-              <!-- 좋아요 -->
-              <form @submit.prevent="changeLike">
-                  <input v-if="isLiked" type="submit" value="💖">
-                  <input v-if="!isLiked" type="submit" value="🤍">
-              </form>
-              <span>좋아요 : {{linkCntLike}}개</span>
-              <!-- 텍스트 일렬정렬하기 -->
-              <div>
-                <b-card-text>
+        <div class="card bg-warning bg-opacity-10" style="width: 24rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{movie.title}}</h5>
+            <hr>
+            <form @submit.prevent="changeLike">
+              <input v-if="isLiked" type="submit" value="💖">
+              <input v-if="!isLiked" type="submit" value="🤍">
+            </form>
+            <span>좋아요 : {{linkCntLike}}개</span>
+            <hr>
+            <h6 class="card-subtitle mb-2 text-muted">평점 : {{movie.vote_avg}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">개봉일 : {{movie.released_date}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">장르 : {{genres}}</h6>
+            <hr>
+            <p class="card-text">{{movie.overview}}</p>
+          </div>
+        </div>
 
-                <!-- <li>{{movie.id}}</li> -->
-                <li>평점 : {{vote_AVG}}</li>
-                <li>개봉일 : {{released_Date}}</li>
-                <li>장르 : {{genres}}</li>
-                <li>줄거리 : {{Overview}}</li>
+        <div class="card bg-danger p-2 bg-opacity-10 mx-1" style="width: 24rem;">
+          <MovieReviewList :movie="movie"/>
+        </div>
 
-              </b-card-text>
-              </div>
-            </b-card-body>
-          </b-col>
-        </b-row>
-      </b-card>
+      </div>
     </div>
 
-    <!-- 동영상팝업창으로 넣기 -->
+
     <div
-    v-show="isShow"
-    id="trailer">
-    <b-embed
-          type="iframe"
-          aspect="16by9"
-          :src="trailer_url"
-          allowfullscreen
-          width="80%" height="800px"
-        ></b-embed>
+      v-show="isShow"
+      id="trailer">
+      <b-embed
+        type="iframe"
+        aspect="16by9"
+        :src="trailer_url"
+        allowfullscreen
+        width="80%" height="800px"
+      ></b-embed>
     </div>
-      <hr>
-      <MovieReviewList :movie="this.movie"/>
-    </div>
+  </div>
 </template>
 
 <script>

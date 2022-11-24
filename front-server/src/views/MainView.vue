@@ -6,25 +6,25 @@
     </b-button>
     <div>
     <!-- <RandomList/> -->
-    <!-- <MovieList
+    <MovieList
     class="row d-flex"
-    /> -->
-    <ComedyList/>
+    />
+    <!-- <ComedyList/> -->
     </div>
 </div>
 
 </template>
 
 <script>
-// import MovieList from '@/components/MovieList'
+import MovieList from '@/components/MovieList'
 // import RandomList from '@/components/RandomList'
-import ComedyList from '@/components/ComedyList'
+// import ComedyList from '@/components/ComedyList'
 export default {
     name: 'MainView',
     components: {
-      // MovieList,
+      MovieList,
       // RandomList,
-      ComedyList
+      // ComedyList
     },
     created() {
       this.getMovies()
