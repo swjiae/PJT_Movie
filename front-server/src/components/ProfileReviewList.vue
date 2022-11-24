@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>My movie diary</h1>
+    <h1>My Review</h1>
     <ProfileReviewListItem
       v-for="review in reviews"
       :key="review.id"

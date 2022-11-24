@@ -25,7 +25,7 @@
         <nav aria-label="footer" class="col-12 col-lg-8">
           <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0" aria-labelledby="sr-footer-heading">
               <p class="mr-3 mr-lg-0 service_tag"><a href="">Customer Service : 02) 4229-0388</a></p> |
-              <p class="mr-3 mr-lg-0 service_tag"><a href="https://www.google.com/search?q=Google+is+the+best+teacher!&oq=Google+is+the+best+teacher!&aqs=chrome..69i57j0i30j69i64.8793j0j15&sourceid=chrome&ie=UTF-8">Customer Technical Support</a></p> |
+              <p class="mr-3 mr-lg-0 service_tag"><a href="https://www.google.com/search?q=Google+is+the+best+teacher!&oq=Google+is+the+best+supporter!&aqs=chrome..69i57j0i30j69i64.8793j0j15&sourceid=chrome&ie=UTF-8">Technical Support</a></p> |
               <p class="mr-3 mr-lg-0 service_tag"><a href="https://www.ssafy.com/ksp/jsp/swp/swpMain.jsp">Address : Samsung Gwangju global center</a></p> |
               <p class="mr-3 mr-lg-0 service_tag"><a href="https://edu.ssafy.com/edu/community/search/searchStudentList.do">Thanks to : Gwangju campus class-3 dongmudle </a></p> |
               <p class="mr-3 mr-lg-0 service_tag"><a data-ga-click="Footer, go to help, text:Docs" href="https://docs.github.com"></a></p>

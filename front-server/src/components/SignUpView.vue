@@ -75,7 +75,6 @@
             
             <label for="profile_img"> profile_img : </label>
             <input type="file" id="profile_img" multiple @change='inputImage()' ref="serveyImage"><br>
-            <input type="submit" value="SignUp">
 
             <b-button type="submit" variant="primary">Signup</b-button>
             <b-button type="reset" variant="danger">Reset</b-button>

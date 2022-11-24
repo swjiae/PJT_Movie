@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>MovieReviewList</h1>
+  <div class="margin:10px;">
+    <h1>Review</h1>
     <router-link :to="{ name: 'MovieReviewCreate', params: { id:movieId } }">[CREATEREVIEW]</router-link>
      <MovieReviewListItem
       v-for="review in reviews"
@@ -8,6 +8,7 @@
       :review="review"
       :movieId="movieId"
     />
+    <hr>
   </div>
 </template>
 

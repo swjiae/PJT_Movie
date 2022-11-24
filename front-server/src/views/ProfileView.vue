@@ -31,7 +31,7 @@
            ws-normal
            user-status-message-wrapper f6 min-width-0">
           <div class="css-truncate css-truncate-target width-fit color-fg-default">
-              <span class="color-fg-muted">My Favorite Janre</span>
+              <span class="color-fg-muted">My Favorite Ganre</span>
           </div>
         </div>
       </div>
@@ -112,6 +112,7 @@
 <script>
 // import ProfileUpdate from '@/components/ProfileUpdate'
 import ProfileReviewList from '@/components/ProfileReviewList'
+
 export default {
     name: 'ProfileView',
     components: {

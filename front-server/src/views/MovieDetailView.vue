@@ -7,7 +7,7 @@
       <b-card no-body class="overflow-hidden" style="max-width: 50%; height:800px">
         <b-row no-gutters>
           <b-col md="7">
-            <b-card-img :src="url+movie.poster_path" alt="Image"
+            <b-card-img :src="url+movie?.poster_path" alt="Image"
             class="rounded-0"
             style="height: auto"
             @mouseover="activate"
@@ -16,7 +16,7 @@
             ></b-card-img>
           </b-col>
           <b-col md="5">
-            <b-card-body :title="movie.title" class="d-flex row">
+            <b-card-body :title="movie?.title" class="d-flex row">
               <hr>
               <!-- 좋아요 -->
               <form @submit.prevent="changeLike">
@@ -27,11 +27,11 @@
               <!-- 텍스트 일렬정렬하기 -->
               <div>
                 <b-card-text>
-                <li>{{movie.id}}</li>
-                <li>평점 : {{movie.vote_avg}}</li>
-                <li>개봉일 : {{movie.released_date}}</li>
+                <li>{{movie?.id}}</li>
+                <li>평점 : {{movie?.vote_avg}}</li>
+                <li>개봉일 : {{movie?.released_date}}</li>
                 <li>장르 : {{genres}}</li>
-                <li>줄거리 : {{movie.overview}}</li>
+                <li>줄거리 : {{movie?.overview}}</li>
               </b-card-text>
               </div>
             </b-card-body>
