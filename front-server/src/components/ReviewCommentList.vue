@@ -28,7 +28,6 @@ export default {
           return comment.review == this.review.id
         })
         return comments
-       
       },
     }
 }

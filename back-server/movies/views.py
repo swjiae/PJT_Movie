@@ -14,13 +14,17 @@ from .serializers import MovieListSerializer, MovieSerializer, ReviewListSeriali
 from django.http import JsonResponse
 
 # Create your views here.
+
+
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated])
 def movie_list(request):
     if request.method == 'GET':
         movies = get_list_or_404(Movie)
-        serializer = MovieListSerializer(movies, many=True)
+        movies2 = movies[:10]
+        serializer = MovieListSerializer(movies2, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET'])
 def movie_detail(request, movie_pk):
@@ -29,13 +33,15 @@ def movie_detail(request, movie_pk):
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
 
+
 @api_view(['GET'])
 def movie_credits(request, movie_pk):
     credits = Credit.objects.filter(movie_id=movie_pk)
     if request.method == 'GET':
         serializer = CreditSerializer(credits, many=True)
         return Response(serializer.data)
-    
+
+
 @api_view(['GET'])
 def movie_trailer(request, movie_pk):
     trailer = get_object_or_404(Trailer, movie_id=movie_pk)
@@ -52,12 +58,14 @@ def review_create(request, movie_pk):
         serializer.save(movie=movie, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
 @api_view(['GET'])
 def review_list(request):
     if request.method == 'GET':
         reviews = get_list_or_404(Review)
         serializer = ReviewListSerializer(reviews, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def review_detail(request, review_pk):
@@ -75,6 +83,7 @@ def review_detail(request, review_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
 
 @api_view(['POST'])
 def comment_create(request, review_pk):
@@ -84,12 +93,14 @@ def comment_create(request, review_pk):
         serializer.save(review=review, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
 @api_view(['GET'])
 def comment_list(request):
     if request.method == 'GET':
         comments = get_list_or_404(Comment)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def review_detail(request, review_pk):
@@ -107,6 +118,7 @@ def review_detail(request, review_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
 
 @api_view(['GET', 'POST'])
 def likes(request, movie_pk):
@@ -125,6 +137,7 @@ def likes(request, movie_pk):
             movie.like_users.add(request.user)
             cntLike = movie.like_users.all().count()
             return JsonResponse({'isLiked': True, 'cntLike': cntLike})
+
 
 @api_view(['GET', 'POST'])
 def review_likes(request, review_pk):

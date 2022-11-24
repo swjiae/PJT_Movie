@@ -1,12 +1,12 @@
 <template>
-  <div class="margin:10px;">
-    <h1>Review</h1>
-    <router-link :to="{ name: 'MovieReviewCreate', params: { id:movieId } }">[CREATEREVIEW]</router-link>
+  <div>
+    <h1>MovieReviewList</h1>
+    <router-link :to="{ name: 'MovieReviewCreate', params: { id:movie.id } }">[CREATEREVIEW]</router-link>
      <MovieReviewListItem
       v-for="review in reviews"
       :key="review.id"
       :review="review"
-      :movieId="movieId"
+      :movie="movie"
     />
     <hr>
   </div>
@@ -29,13 +29,13 @@
     computed: {
       reviews() {
         const reviews = this.$store.state.reviews.filter((review) => {
-          return review.movie == this.movie?.movie_id
+          return review.movie.id == this.movie.id
         })
         return reviews
       },
-      movieId() {
-        return this.movie?.movie_id
-      }
+      // movieId() {
+      //   return this.movie?.movie_id
+      // }
     },
   }
 </script>

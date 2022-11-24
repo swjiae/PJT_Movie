@@ -1,10 +1,7 @@
 <template>
   <div class="row">
     <!-- {{ 뒤로가기 }} -->
-    <div class="d-flex justify-content-center row">
-    <router-link :to="{ name: 'MainView' }"><b-icon icon="arrow-left" animation="cylon" variant="dark" style="width:15px"></b-icon></router-link>
-    </div>
-
+    <button><router-link :to="{ name: 'MainView' }">BAEK</router-link></button>
     <div class="d-flex justify-content-center">
       <b-card no-body class="overflow-hidden" style="max-width: 50%; height:800px">
         <b-row no-gutters>
@@ -58,15 +55,13 @@
         ></b-embed>
     </div>
       <hr>
-      <MovieReviewList :movie="movie"/>
+      <MovieReviewList :movie="this.movie"/>
     </div>
-
 </template>
 
 <script>
 import MovieReviewList from '@/components/MovieReviewList'
 import axios from 'axios'
-
 const API_URL = 'http://127.0.0.1:8000'
 export default {
     name: 'MovieDetailView',
@@ -91,6 +86,7 @@ export default {
       this.checkLiked()
     },
     computed: {
+      //template에서 movie.data를 불러오는데 delay가 발생 -> computed/ if-else문을 이용해 오류를 해결
       linkCntLike() {
         return this.cntLike
       },
@@ -125,7 +121,6 @@ export default {
       released_Date() {
         if (this.movie) {
           console.log(Array(this.movie.released_date))
-          
           return this.movie.released_date
         } else {
           return console.log('plz wait for released_date')
@@ -134,58 +129,47 @@ export default {
 
     },
     methods: {
+      // detail data가 있어야 이 페이지의 모든 요소를 띄울 수 있다.
+      // 비동기의 특성상 먼저 실행되어 선행되야하는 값이 없는 경우에 오류가 뜨기 때문에
+      // async ~ await 함수를 이용해 실행순서를 정해둔다
       async getAllDetail() {
         const getdetail_res =  await axios.get(`${API_URL}/api/v1/movies/${this.$route.params.id}`)
         const detail = getdetail_res.data
         const genres = detail.genres
-        // console.log('get_movie_detail')
-        // console.log(detail)
         this.movie = detail
         this.genre_list = genres
-        // console.log('genre')
-        // console.log(this.genre_list)
         const getcredit_res = await axios.get(`${API_URL}/api/v1/credits/${this.$route.params.id}`)
         const credit = getcredit_res.data
         this.credits = credit
-        // console.log('getcredit_res')
-        // console.log(credit)
         this.test()
         const gettrailer_res = await axios.get(`${API_URL}/api/v1/trailer/${this.$route.params.id}`)
-        // console.log('trailer')
         const trailer_data = gettrailer_res.data
         const trailer_key = trailer_data.key
         const trailer_url = this.youtube_url+trailer_key
         this.trailer_url = trailer_url
-        // console.log('trailer_url')
-        // console.log(this.trailer_url)
       }
       ,
-        test() {
-          this.genre_list.forEach((el) => {
-            this.genres.push(el.name)
+      activate() {
+        this.isShow = true
+      },
+      diactivate() {
+        this.isShow = false
+      },
+      checkLiked() {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/${this.$route.params.id}/likes/`,
+          headers: {
+            'Authorization': `Token ${this.$store.state.token}`,
+          },
+        })
+          .then((res) => {
+            this.isLiked = res.data.isLiked
+            this.cntLike = res.data.cntLike
           })
-        },
-        activate() {
-          this.isShow = true
-        },
-        diactivate() {
-          this.isShow = false
-        },
-        checkLiked() {
-          axios({
-            method: 'get',
-            url: `${API_URL}/api/v1/${this.$route.params.id}/likes/`,
-            headers: {
-              'Authorization': `Token ${this.$store.state.token}`,
-            },
+          .catch((err) => {
+            console.log(err)
           })
-            .then((res) => {
-              this.isLiked = res.data.isLiked
-              this.cntLike = res.data.cntLike
-            })
-            .catch((err) => {
-              console.log(err)
-            })
         },
         changeLike() {
           axios({

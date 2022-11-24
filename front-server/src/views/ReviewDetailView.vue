@@ -6,7 +6,7 @@
       
       <b-card-img :src="url+getReview.movie.poster_path" alt="Image"
         class="rounded-0"
-        style="height: auto"
+        style="height: 100px"
         @mouseover="activate"
         @mouseout="diactivate"
       ></b-card-img>
@@ -73,11 +73,12 @@
         })
           .then((res) => {
             console.log(res)
+            this.$store.dispatch('getReviews')
+            this.$router.push({ name: 'MovieDetailView', parms:{ id: this.$route.params.id }})
           })
           .catch((err) => {
             console.log(err)
           })
-        this.$router.push({ name: 'MovieDetailView', parms:{ id: this.$route.params.id }})
       },
       checkLiked() {
         axios({
