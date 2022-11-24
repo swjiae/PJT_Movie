@@ -8,6 +8,7 @@
       :review="review"
       :movie="movie"
     />
+    <hr>
   </div>
 </template>
 

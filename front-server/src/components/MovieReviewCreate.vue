@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>MovieReviewCreate</h1>
+    <h3>감상평을 자유롭게 남겨보세요!</h3>
     <form @submit.prevent="createReview">
       <label for="title">제목 : </label>
       <input type="text" id="title" v-model.trim="title"><br>
