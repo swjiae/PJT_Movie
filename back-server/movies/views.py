@@ -25,8 +25,31 @@ def movie_list(request):
         serializer = MovieListSerializer(movies2, many=True)
         return Response(serializer.data)
 
+# Create your views here.
+
 
 @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+def movie_list(request):
+    if request.method == 'GET':
+        movies = get_list_or_404(Movie)
+        nemo = []
+        for movie in movies:
+            if movie.movie_id == 12:
+                nemo.append(movie.genres.all()[0])
+        # print(nemo)
+        movies2 = []
+        for i in range(len(movies)):
+            for j in range(len(movies[i].genres.all())):
+                if movies[i].genres.all()[j] == nemo[0]:
+                    movies2.append(movies[i])
+        # movies2 = movies[:10]
+        serializer = MovieListSerializer(movies2, many=True)
+        return Response(serializer.data)
+
+
+@ api_view(['GET'])
+# @permission_classes([IsAuthenticated])
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'GET':
@@ -34,7 +57,7 @@ def movie_detail(request, movie_pk):
         return Response(serializer.data)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def movie_credits(request, movie_pk):
     credits = Credit.objects.filter(movie_id=movie_pk)
     if request.method == 'GET':
@@ -42,7 +65,7 @@ def movie_credits(request, movie_pk):
         return Response(serializer.data)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def movie_trailer(request, movie_pk):
     trailer = get_object_or_404(Trailer, movie_id=movie_pk)
     if request.method == 'GET':
@@ -50,7 +73,8 @@ def movie_trailer(request, movie_pk):
         return Response(serializer.data)
 
 
-@api_view(['POST'])
+@ api_view(['POST'])
+# @permission_classes([IsAuthenticated])
 def review_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = ReviewListSerializer(data=request.data)
@@ -59,7 +83,8 @@ def review_create(request, movie_pk):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
+# @permission_classes([IsAuthenticated])
 def review_list(request):
     if request.method == 'GET':
         reviews = get_list_or_404(Review)
@@ -67,7 +92,8 @@ def review_list(request):
         return Response(serializer.data)
 
 
-@api_view(['GET', 'DELETE', 'PUT'])
+@ api_view(['GET', 'DELETE', 'PUT'])
+# @permission_classes([IsAuthenticated])
 def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
@@ -85,7 +111,8 @@ def review_detail(request, review_pk):
             return Response(serializer.data)
 
 
-@api_view(['POST'])
+@ api_view(['POST'])
+# @permission_classes([IsAuthenticated])
 def comment_create(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     serializer = CommentSerializer(data=request.data)
@@ -94,7 +121,8 @@ def comment_create(request, review_pk):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
+# @permission_classes([IsAuthenticated])
 def comment_list(request):
     if request.method == 'GET':
         comments = get_list_or_404(Comment)
@@ -102,7 +130,8 @@ def comment_list(request):
         return Response(serializer.data)
 
 
-@api_view(['GET', 'DELETE', 'PUT'])
+@ api_view(['GET', 'DELETE', 'PUT'])
+# @permission_classes([IsAuthenticated])
 def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
@@ -120,7 +149,8 @@ def review_detail(request, review_pk):
             return Response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
+@ api_view(['GET', 'POST'])
+# @permission_classes([IsAuthenticated])
 def likes(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if request.method == 'GET':
@@ -139,7 +169,8 @@ def likes(request, movie_pk):
             return JsonResponse({'isLiked': True, 'cntLike': cntLike})
 
 
-@api_view(['GET', 'POST'])
+@ api_view(['GET', 'POST'])
+# @permission_classes([IsAuthenticated])
 def review_likes(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':

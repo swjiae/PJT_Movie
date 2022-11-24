@@ -23,6 +23,9 @@ export default {
       },
       reviewId() {
         return this.review.id
+      },
+      movieId() {
+        return this.movie.id
       }
     }
   }
