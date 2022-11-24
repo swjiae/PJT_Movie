@@ -1,6 +1,7 @@
 <template>
   <div>
-    {{ comment }}
+    {{ comment.nickname}}:
+    {{ comment.content }}
   </div>
 </template>
 

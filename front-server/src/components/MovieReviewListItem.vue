@@ -18,6 +18,9 @@ export default {
       review: Object,
     },
     computed: {
+      movieId() {
+        return this.movie.id
+      },
       reviewId() {
         return this.review.id
       },
