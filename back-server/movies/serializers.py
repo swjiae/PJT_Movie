@@ -16,6 +16,11 @@ class MovieListSerializer(serializers.ModelSerializer):
 
 # review list
 class ReviewListSerializer(serializers.ModelSerializer):
+    class MovieSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Movie
+            exclude = ('genres', 'like_users',)
+    movie = MovieSerializer(read_only=True)
     
     class UserSerializer(serializers.ModelSerializer):
         class Meta:

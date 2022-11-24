@@ -29,11 +29,11 @@ export default new Vuex.Store({
   mutations: {
     SAVE_TOKEN(state, token) {
       state.token = token
-      router.push({ name: 'MainView' })
+      router.push({ name: 'HomeView' })
     },
     DELETE_TOKEN(state) {
       state.token = null
-      router.push({ name: 'PreMainView' })
+      router.push({ name: 'HomeView' })
     },
     GET_MOVIES(state, movies) {
       state.movies = movies

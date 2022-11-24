@@ -72,14 +72,9 @@
               ></b-form-input>
             </b-form>
 
-            <b-form-file
-              v-model="form.profile_img"
-              :state="Boolean(form.profile_img)"
-              placeholder="Choose a file or drop it here..."
-              drop-placeholder="Drop file here..."
-              ></b-form-file>
-              <div class="mt-3">Selected file: {{ form.profile_img ? form.profile_img.name : '' }}</div>
-
+            
+            <label for="profile_img"> profile_img : </label>
+            <input type="file" id="profile_img" multiple @change='inputImage()' ref="serveyImage"><br>
 
             <b-button type="submit" variant="primary">Signup</b-button>
             <b-button type="reset" variant="danger">Reset</b-button>

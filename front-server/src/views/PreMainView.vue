@@ -15,7 +15,7 @@ export default {
   name: 'PreMainView',
   components: {
     NavBarView,
-  }
+  },
 }
 </script>
 

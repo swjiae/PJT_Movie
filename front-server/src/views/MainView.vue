@@ -11,7 +11,8 @@
     /> -->
     <ComedyList/>
     </div>
-  </div>
+</div>
+
 </template>
 
 <script>

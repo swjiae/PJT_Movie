@@ -19,21 +19,24 @@
           </b-col>
           <b-col md="5">
             <b-card-body :title="Title" class="d-flex row">
+
               <hr>
               <!-- 좋아요 -->
               <form @submit.prevent="changeLike">
-                  <input v-if="isLiked" type="submit" value="좋아요 취소">
-                  <input v-if="!isLiked" type="submit" value="좋아요">
+                  <input v-if="isLiked" type="submit" value="💖">
+                  <input v-if="!isLiked" type="submit" value="🤍">
               </form>
               <span>좋아요 : {{linkCntLike}}개</span>
               <!-- 텍스트 일렬정렬하기 -->
               <div>
                 <b-card-text>
+
                 <!-- <li>{{movie.id}}</li> -->
                 <li>평점 : {{vote_AVG}}</li>
                 <li>개봉일 : {{released_Date}}</li>
                 <li>장르 : {{genres}}</li>
                 <li>줄거리 : {{Overview}}</li>
+
               </b-card-text>
               </div>
             </b-card-body>

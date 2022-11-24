@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h1>ProfileReviewList</h1>
+    <h1>My Review</h1>
     <ProfileReviewListItem
       v-for="review in reviews"
       :key="review.id"
       :review="review"
+      class="col-2"
     />
   </div>
 </template>
