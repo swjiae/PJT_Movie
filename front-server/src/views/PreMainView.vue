@@ -11,6 +11,7 @@
 
 <script>
 import NavBarView from '@/components/NavBarView'
+
 export default {
   name: 'PreMainView',
   components: {
