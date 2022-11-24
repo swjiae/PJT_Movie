@@ -1,13 +1,18 @@
 <template>
   <div>
-    <h1>MainView</h1>
-    <b-button @click="logOut">logOut</b-button>
+    <nav>
+      <hr>
+      <router-link :to="{ name: 'ProfileView' }">Profile</router-link>
+      <hr>
+    </nav>
     <div>
+
     <MovieList
     class="row d-flex"
     />
     </div>
-  </div>
+</div>
+
 </template>
 
 <script>
@@ -24,9 +29,6 @@ export default {
       getMovies() {
         this.$store.dispatch('getMovies')
       },
-      logOut() {
-        this.$store.dispatch('logOut')
-      }
     }
 }
 </script>

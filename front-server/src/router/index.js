@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import HomeView from '@/views/HomeView'
 import PreMainView from '@/views/PreMainView'
 import MainView from '@/views/MainView'
 import ProfileView from '@/views/ProfileView'
@@ -11,6 +12,11 @@ import ReviewDetailView from '@/views/ReviewDetailView'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'HomeView',
+    component: HomeView
+  },
   {
     path: '/premain',
     name: 'PreMainView',

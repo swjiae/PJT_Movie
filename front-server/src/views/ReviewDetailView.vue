@@ -3,12 +3,20 @@
       <h1>ReviewDetailView</h1>
       <button @click="deleteReview">DELETE</button><br>
       <button><router-link :to="{ name: 'MovieDetailView', parms:{ id: this.$route.params.id }}">뒤로가기</router-link></button>
+      
+      <b-card-img :src="url+getReview.movie.poster_path" alt="Image"
+        class="rounded-0"
+        style="height: auto"
+        @mouseover="activate"
+        @mouseout="diactivate"
+      ></b-card-img>
+
       {{ getReview }}
 
 
       <form @submit.prevent="changeLike">
-          <input v-if="isLiked" type="submit" value="좋아요 취소">
-          <input v-if="!isLiked" type="submit" value="좋아요">
+          <input v-if="isLiked" type="submit" value="💖">
+          <input v-if="!isLiked" type="submit" value="🤍">
       </form>
       <span>좋아요 : {{linkCntLike}}개</span>
 
@@ -35,6 +43,7 @@
     },
     data() {
       return {
+        url : 'https://image.tmdb.org/t/p/original/',
         isLiked: false,
         cntLike: null,
       }

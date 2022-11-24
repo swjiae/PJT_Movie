@@ -10,7 +10,6 @@
       tag="article"
       style="max-width: 20rem; height:650px"
       class="mb-2"
-      
     >
       <!-- <b-card-text> -->
         <!-- {{ movie.overview }} -->
