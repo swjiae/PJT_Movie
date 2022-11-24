@@ -20,8 +20,8 @@
               <hr>
               <!-- 좋아요 -->
               <form @submit.prevent="changeLike">
-                  <input v-if="isLiked" type="submit" value="좋아요 취소">
-                  <input v-if="!isLiked" type="submit" value="좋아요">
+                  <input v-if="isLiked" type="submit" value="💖">
+                  <input v-if="!isLiked" type="submit" value="🤍">
               </form>
               <span>좋아요 : {{linkCntLike}}개</span>
               <!-- 텍스트 일렬정렬하기 -->
@@ -51,7 +51,6 @@
           width="80%" height="800px"
         ></b-embed>
     </div>
-
       <hr>
       <MovieReviewList :movie="movie"/>
     </div>
