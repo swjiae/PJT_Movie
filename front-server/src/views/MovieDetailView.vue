@@ -4,7 +4,7 @@
     <hr>
     <div class="row">
       <div class="d-flex col">
-        <img :src="url+movie.poster_path" alt="Image"
+        <img :src="url+movie?.poster_path" alt="Image"
           class="rounded-0"
           style="height: 36rem"
           @mouseover="activate"
@@ -14,7 +14,7 @@
 
         <div class="card bg-warning bg-opacity-10" style="width: 24rem;">
           <div class="card-body">
-            <h5 class="card-title">{{movie.title}}</h5>
+            <h5 class="card-title">{{movie?.title}}</h5>
             <hr>
             <form @submit.prevent="changeLike">
               <input v-if="isLiked" type="submit" value="💖">
@@ -22,11 +22,11 @@
             </form>
             <span>좋아요 : {{linkCntLike}}개</span>
             <hr>
-            <h6 class="card-subtitle mb-2 text-muted">평점 : {{movie.vote_avg}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">개봉일 : {{movie.released_date}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">장르 : {{genres}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">평점 : {{movie?.vote_avg}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">개봉일 : {{movie?.released_date}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">장르 : {{genre}}</h6>
             <hr>
-            <p class="card-text">{{movie.overview}}</p>
+            <p class="card-text">{{movie?.overview}}</p>
           </div>
         </div>
 
@@ -36,9 +36,7 @@
 
       </div>
     </div>
-
-
-    <div
+    <!-- <div
       v-show="isShow"
       id="trailer">
       <b-embed
@@ -47,8 +45,8 @@
         :src="trailer_url"
         allowfullscreen
         width="80%" height="800px"
-      ></b-embed>
-    </div>
+      ></b-embed> -->
+    <!-- </div> -->
   </div>
 </template>
 
@@ -119,7 +117,13 @@ export default {
           return console.log('plz wait for released_date')
         }
       },
-
+      genre() {
+        let result = []
+        this.genre_list.forEach((el) => {
+          result.push(el.name)
+        })
+        return result
+      }
     },
     methods: {
       // detail data가 있어야 이 페이지의 모든 요소를 띄울 수 있다.
@@ -134,12 +138,11 @@ export default {
         const getcredit_res = await axios.get(`${API_URL}/api/v1/credits/${this.$route.params.id}`)
         const credit = getcredit_res.data
         this.credits = credit
-        this.test()
-        const gettrailer_res = await axios.get(`${API_URL}/api/v1/trailer/${this.$route.params.id}`)
-        const trailer_data = gettrailer_res.data
-        const trailer_key = trailer_data.key
-        const trailer_url = this.youtube_url+trailer_key
-        this.trailer_url = trailer_url
+        // const gettrailer_res = await axios.get(`${API_URL}/api/v1/trailer/${this.$route.params.id}`)
+        // const trailer_data = gettrailer_res.data
+        // const trailer_key = trailer_data.key
+        // const trailer_url = this.youtube_url+trailer_key
+        // this.trailer_url = trailer_url
       }
       ,
       activate() {

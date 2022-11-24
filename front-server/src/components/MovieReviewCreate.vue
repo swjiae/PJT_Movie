@@ -1,7 +1,26 @@
 <template>
   <div>
     <h3>감상평을 자유롭게 남겨보세요!</h3>
-    <form @submit.prevent="createReview">
+    <div class="container text-start border rounded p-3">
+      <form @submit.prevent="createReview">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">제목</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" v-model.trim="title" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">평점</label>
+          <input v-model.trim="score" type="number" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">내용</label>
+          <textarea  v-model="content" class="form-control" id="exampleInputPassword1"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-info">감상평 작성</button>
+      </form>
+    </div>
+
+
+    <!-- <form @submit.prevent="createReview">
       <label for="title">제목 : </label>
       <input type="text" id="title" v-model.trim="title"><br>
       <label for="score">평점 : </label>
@@ -9,7 +28,7 @@
       <label for="content">내용 : </label>
       <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
       <input type="submit" id="submit">
-    </form>
+    </form> -->
   </div>
 </template>
 
@@ -47,15 +66,15 @@ export default {
         axios({
           method: 'post',
           url: `${API_URL}/api/v1/movies/${this.$route.params.id}/reviews/`,
+          headers: {
+            Authorization: `Token ${this.$store.state.token}`
+          },
           data: {
             title: title,
             score: score,
             content: content,
             nickname: nickname,
           },
-          headers: {
-            Authorization: `Token ${this.$store.state.token}`
-          }
         })
           .then((res) => {
             console.log(res)

@@ -19,8 +19,16 @@ from .serializers import MovieListSerializer, MovieSerializer, ReviewListSeriali
 def movie_list(request):
     if request.method == 'GET':
         movies = get_list_or_404(Movie)
-        serializer = MovieListSerializer(movies, many=True)
+        m = []
+        for movie in movies:
+            for j in movie.genres.all():
+                print(j)
+                if j == '애니메이션':
+                    m.append(movie)
+
+        serializer = MovieListSerializer(m, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET'])
 def movie_detail(request, movie_pk):
@@ -28,6 +36,7 @@ def movie_detail(request, movie_pk):
     if request.method == 'GET':
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
+
 
 @api_view(['GET'])
 def movie_credits(request, movie_pk):
@@ -45,12 +54,14 @@ def review_create(request, movie_pk):
         serializer.save(movie=movie, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
 @api_view(['GET'])
 def review_list(request):
     if request.method == 'GET':
         reviews = get_list_or_404(Review)
         serializer = ReviewListSerializer(reviews, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def review_detail(request, review_pk):
@@ -68,6 +79,7 @@ def review_detail(request, review_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
 
 @api_view(['POST'])
 def comment_create(request, review_pk):
@@ -77,12 +89,14 @@ def comment_create(request, review_pk):
         serializer.save(review=review, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
 @api_view(['GET'])
 def comment_list(request):
     if request.method == 'GET':
         comments = get_list_or_404(Comment)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def review_detail(request, review_pk):
@@ -100,6 +114,7 @@ def review_detail(request, review_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
 
 @api_view(['POST'])
 def likes(request, movie_pk):

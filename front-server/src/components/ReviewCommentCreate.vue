@@ -40,8 +40,9 @@ export default {
         }
       })
         .then((res) => {
-          console.log(res)
           this.content = null
+          console.log(res, 'qwdqwdqwdqwdqwdqd')
+          this.$store.dispatch('getComments')
         })
         .catch((err) => {
           console.log(err)

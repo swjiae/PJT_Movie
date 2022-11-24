@@ -14,12 +14,15 @@
 export default {
     name: 'MovieReviewListItem',
     props: {
-      movieId: String,
+      movie: Object,
       review: Object,
     },
     computed: {
       reviewId() {
         return this.review.id
+      },
+      movieId() {
+        return this.movie.id
       }
     }
   }

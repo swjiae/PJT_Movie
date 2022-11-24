@@ -1,9 +1,5 @@
 <template>
   <div>
-    <h1>MainView</h1>
-    <b-button @click="logOut" variant="outline-info" class="mb-2">
-      <b-icon icon="power" aria-hidden="true"></b-icon> logOut
-    </b-button>
     <div>
     <!-- <RandomList/> -->
     <MovieList

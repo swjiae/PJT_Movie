@@ -7,8 +7,6 @@
       <b-card-img :src="url+getReview.movie.poster_path" alt="Image"
         class="rounded-0"
         style="height: 100px"
-        @mouseover="activate"
-        @mouseout="diactivate"
       ></b-card-img>
 
       {{ getReview }}
