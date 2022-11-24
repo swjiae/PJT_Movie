@@ -3,6 +3,10 @@
     <header>
       <a href="http://localhost:8080"><h1 style="font-family: 'Rubik Bubbles', cursive;" id="tweedles">TWEEDLES</h1></a>
       <b-button @click="logOut" v-if="this.$store.state.token">Logout</b-button>
+      <router-link :to="{ name: 'HomeView' }">홈뷰</router-link> |
+      <router-link :to="{ name: 'PreMainView' }">프리메인뷰</router-link> |
+      <router-link :to="{ name: 'MainView' }">메인뷰</router-link> |
+      <router-link :to="{ name: 'ProfileView' }">프로필뷰</router-link> |
     </header>
     <body>
       <router-link :to="{ name: 'HomeView' }"></router-link>
